@@ -1,0 +1,5 @@
+#===== Idea ignore ===========
+/.idea/
+*.iml
+#===== Node modules ==========
+/node_modules/
