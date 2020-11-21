@@ -1,5 +1,7 @@
+const SERVER_ORIGIN = "https://defiant-holly-hair.glitch.me";
+
 const doRequest = (method, url, body, cb) => {
-  fetch(url, {
+  fetch(SERVER_ORIGIN + '/api/' + url, {
     method,
     headers: {
       "Content-Type": "application/json"

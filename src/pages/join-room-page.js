@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import ask from "../utils/ask";
 import doRequest from "../utils/doRequest";
-import { SERVER_ORIGIN } from "../constants";
 import PlayersList from "../components/players-list";
 
 const JoinRoomPage = () => {
@@ -14,7 +13,7 @@ const JoinRoomPage = () => {
       name = ask("Enter your name!");
       doRequest(
         "post",
-        SERVER_ORIGIN + "/api/join-room",
+        "join-room",
         { name, roomId },
         res => {
           if (res.error) {

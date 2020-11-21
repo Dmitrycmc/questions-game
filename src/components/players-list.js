@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
 import doRequest from "../utils/doRequest";
-import { SERVER_ORIGIN } from "../constants";
 
 const PlayersList = ({ roomId }) => {
   const [players, setPlayers] = useState(null);
@@ -8,7 +7,7 @@ const PlayersList = ({ roomId }) => {
   const refresh = useCallback(() => {
     doRequest(
       "get",
-      SERVER_ORIGIN + "/api/room-participants?roomId=" + roomId,
+      "room-participants?roomId=" + roomId,
       null,
       players => {
         setPlayers(players);
