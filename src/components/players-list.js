@@ -1,24 +1,40 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState, useCallback } from "react";
 import doRequest from "../utils/doRequest";
-import {SERVER_ORIGIN} from "../constants";
+import { SERVER_ORIGIN } from "../constants";
 
-const PlayersList = ({roomId}) => {
-    const [players, setPlayers] = useState(null);
-    useEffect(() => {
-        setInterval(() => {
-            doRequest('get', SERVER_ORIGIN + '/api/room-participants?roomId=' + roomId, null, players => {
-                setPlayers(players);
-            });
-        }, 3000);
-    }, []);
+const PlayersList = ({ roomId }) => {
+  const [players, setPlayers] = useState(null);
 
+  const refresh = useCallback(() => {
+    doRequest(
+      "get",
+      SERVER_ORIGIN + "/api/room-participants?roomId=" + roomId,
+      null,
+      players => {
+        setPlayers(players);
+      }
+    );
+  }, []);
 
-    return players ? (<>
-        Players:
-        {players && <ol>
-            {players.map(player => (<li key={player}>{player}</li>))}
-        </ol>}
-        </>) : "Processing";
+  useEffect(() => {
+    refresh();
+    setInterval(refresh, 5000);
+  }, []);
+
+  return (
+    <div>
+      <div>Players:</div>
+      {players ? (
+        <ol>
+          {players.map(player => (
+            <li key={player}>{player}</li>
+          ))}
+        </ol>
+      ) : (
+        "Processing"
+      )}
+    </div>
+  );
 };
 
 export default PlayersList;
