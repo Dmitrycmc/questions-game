@@ -9,7 +9,7 @@ const App = () => (
       <Route path="/new-room">
         <NewRoomPage />
       </Route>
-      <Route path="/join-room">
+      <Route path="/room">
         <JoinRoomPage />
       </Route>
       <Route path="">

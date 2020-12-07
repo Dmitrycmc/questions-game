@@ -19,13 +19,13 @@ const NewRoomPage = () => {
         );
     }, []);
 
-    const href = useMemo(() => "join-room?roomId=" + roomId, [roomId]);
+    const href = useMemo(() => "room?roomId=" + roomId, [roomId]);
 
     const onStart = useCallback(() => {
-        doRequest('post', 'start-game', null, () => {
-            window.location.assign(`${window.location.pathname}?roomId=${roomId}&playerName=${name}`);
+        doRequest('post', 'start-game', {roomId}, () => {
+            window.location.assign(`/room?roomId=${roomId}&playerName=${name}`);
         })
-    }, []);
+    }, [roomId]);
 
     return roomId ? (
         <div>
@@ -33,7 +33,7 @@ const NewRoomPage = () => {
                 Ссылка на комнату
             </a>
             <button onClick={onStart}>Start game</button>
-            <PlayersList roomId={roomId}/>
+            <PlayersList roomId={roomId} playerName={name}/>
         </div>
     ) : (
         "Processing"

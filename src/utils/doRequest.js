@@ -9,7 +9,7 @@ const doRequest = (method, url, body, cb) => {
     ...(body && { body: JSON.stringify(body) })
   })
     .then(res => res.json())
-    .then(cb);
+    .then(cb).catch(err => console.warn(err));
 };
 
 export default doRequest;

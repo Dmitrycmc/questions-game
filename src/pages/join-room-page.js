@@ -26,7 +26,7 @@ const JoinRoomPage = () => {
     }
   }, []);
 
-  return <PlayersList roomId={roomId} />;
+  return name && <PlayersList roomId={roomId} playerName={name}/>;
 };
 
 export default JoinRoomPage;
